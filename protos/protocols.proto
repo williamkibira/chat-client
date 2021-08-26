@@ -1,0 +1,31 @@
+syntax = "proto3";
+option cc_enable_arenas = true;
+
+message RegistrationDetails {
+    string first_name = 2;
+	string last_name = 3;
+	string email = 4;
+	bytes photo = 5;
+	string photo_content_type = 6;
+	string password = 7;
+	repeated string roles = 8;
+}
+
+message UpdateDetails {
+    string first_name = 2;
+	string last_name = 3;
+	string email = 4;
+	bytes photo = 5;
+	string photo_content_type = 6;
+	repeated string added_roles = 7;
+	repeated string removed_roles = 8;
+}
+
+message PasswordResetRequest {
+   string email = 1;
+}
+
+message PasswordReset {
+	string identifier = 1;
+	string password = 2;
+}
