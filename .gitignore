@@ -1,5 +1,9 @@
 conaninfo.txt
 conanbuildinfo.cmake
+conanbuildinfo.txt
 conan.lock
 graph_info.json
 build/
+.kdev4
+
+*.kdev4

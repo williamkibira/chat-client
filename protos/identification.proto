@@ -1,0 +1,26 @@
+syntax = "proto3";
+option cc_enable_arenas = true;
+option optimize_for = LITE_RUNTIME;
+
+message Device {
+    string name = 1;
+    string operating_system = 2;
+    string version = 3;
+    string ip_address = 4;
+}
+
+message Identification {
+    bytes token = 1;
+    Device device = 2;
+}
+
+message DetailsRequest {
+    string identifier = 1;
+}
+
+message Details {
+    string first_name = 1;
+    string last_name = 2;
+    string photo_identifier = 3;
+    string nick_name = 4;
+}

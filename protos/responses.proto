@@ -1,0 +1,17 @@
+syntax = "proto3";
+option cc_enable_arenas = true;
+option optimize_for = LITE_RUNTIME;
+
+import "google/protobuf/timestamp.proto";
+
+message Info {
+    string message = 1;
+    string details = 2;
+    google.protobuf.Timestamp occurred_at = 3;
+}
+
+message Failure {
+    string error = 1;
+    string details = 2;
+    google.protobuf.Timestamp occurred_at = 3;
+}
