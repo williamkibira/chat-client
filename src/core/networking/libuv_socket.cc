@@ -12,12 +12,15 @@ UVSocketClient::UVSocketClient(uv_loop_t *loop, const std::string &ip_address, i
 
 {
   this->loop->data = this;
-  this->write_request.data = this;
+  this->write_request = std::unique_ptr<uv_write_t>(new (uv_write_t));
+  this->write_request->data = this;
   this->connect.data = this;
   this->socket.data = this;
 }
 UVSocketClient::~UVSocketClient()
 {
+  this->write_request.release();
+  this->write_request.reset();
 }
 
 void UVSocketClient::start()
@@ -82,15 +85,15 @@ void UVSocketClient::on_tcp_read(uv_stream_t *stream, ssize_t nread, const uv_bu
   if (nread == UV_EOF) {
     spdlog::get("chat-client")->error("DISCONNECTED WITH EOF");
     uv_read_stop(stream);
-  } else {
-    if (nread > 0) {
+  } else if (nread > 0) {
       spdlog::get("chat-client")->info("CONTENT SIZE: {}", nread);
       auto type = static_cast<ResponseType>(ntohs(*reinterpret_cast<uint16_t *>(buffer->base)));
       spdlog::get("chat-client")->info("GOT ORDER FROM SERVER");
       if (instance->instructionReceivedCallback) {
         instance->instructionReceivedCallback(type, instance->read_tcp_buffer);
       }
-    }
+  } else {
+    uv_read_stop(stream);
   }
   uv_read_start(instance->connect.handle, UVSocketClient::allocate_buffer, UVSocketClient::on_tcp_read);
 }
@@ -106,20 +109,30 @@ void UVSocketClient::do_tcp_write()
     uv_buf_t buffer;
     buffer.base = (char *)content.data();
     buffer.len = content.size();
-    spdlog::get("chat-client")->info("SUBMITTING REQUEST TO SEND QUEUE");
-    uv_write(&this->write_request, connect.handle, &buffer, 1, [](uv_write_t *req, int status) -> void {
-      spdlog::get("chat-client")->warn("SUCCESSFULLY WROTE DATA , PREPARE FOR A RECALL");
-      auto instance = static_cast<UVSocketClient *>(req->data);
-      spdlog::get("chat-client")->warn("GOT INSTANCE OF HANDLE");
-      if (status == 0) {
-        instance->write_tcp_buffer.pop_front();
-        if (!instance->write_tcp_buffer.empty()) {
-          instance->do_tcp_write();
-        }
-      } else {
-        spdlog::get("chat-client")->error("FAILED ON WRITE: {} {}", uv_strerror(status), uv_err_name(status));
-      }
-    });
+    try {
+      // spdlog::get("chat-client")->info("SUBMITTING REQUEST TO SEND QUEUE");
+      // uv_write(this->write_request.get(), connect.handle, &buffer, 1, [](uv_write_t *req, int status) -> void {
+      //   spdlog::get("chat-client")->warn("SUCCESSFULLY WROTE DATA , PREPARE FOR A RECALL");
+      //   auto instance = static_cast<UVSocketClient *>(req->data);
+      //   spdlog::get("chat-client")->warn("GOT INSTANCE OF HANDLE");
+      //   if (status == 0) {
+      //     instance->write_tcp_buffer.pop_front();
+      //     if (!instance->write_tcp_buffer.empty()) {
+      //       instance->do_tcp_write();
+      //     }
+      //   } else {
+      //     spdlog::get("chat-client")->error("FAILED ON WRITE: {} {}", uv_strerror(status), uv_err_name(status));
+      //   }
+      // });
+     int status = uv_try_write(connect.handle, &buffer, 1);
+     if(status == 0) {
+       spdlog::get("chat-client")->info("WRITE WAS OK");
+     } else {
+       spdlog::get("chat-client")->error("FAILED ON WRITE: {} {}", uv_strerror(uv_translate_sys_error(status)), uv_err_name(uv_translate_sys_error(status)));
+     }
+    }catch(std::exception& e) {
+      spdlog::get("chat-client")->error("FAILED ON WRITER: {}", e.what());
+    }
   }
 }
 }// namespace core::networking::socket

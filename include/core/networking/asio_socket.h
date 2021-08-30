@@ -40,6 +40,7 @@ private:
   tcp::socket tcp_socket;
   tcp::resolver::results_type &tcp_endpoints;
   std::vector<uint8_t> read_tcp_buffer;
+  uint8_t *raw_buffer;
   std::deque<std::vector<uint8_t>> write_tcp_buffer;
   InstructionReceivedCallback instructionReceivedCallback;
   PayloadReceivedCallback payloadReceivedCallback;

@@ -7,9 +7,7 @@ add_compile_options(-std=c++17)
 include(${CMAKE_CURRENT_LIST_DIR}/conanbuildinfo.cmake)
 conan_basic_setup(TARGETS)
 
-# set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall -Wextra")
-# set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_PROJECT_VERSION "1.0.0")
@@ -47,15 +45,6 @@ add_subdirectory("${CMAKE_CURRENT_LIST_DIR}/protos")
 
 set(PROJECT_SRC_FOLDER "${CMAKE_CURRENT_LIST_DIR}/src")
 set(PROJECT_HDRS_FOLDER "${CMAKE_CURRENT_LIST_DIR}/include")
-
-##################################################################################
-# Add Third party libraries in folders                                           #
-##################################################################################
-
-# add_subdirectory("${CMAKE_CURRENT_LIST_DIR}/third_party/spdlog")
-# add_subdirectory("${CMAKE_CURRENT_LIST_DIR}/third_party/libuv")
-# add_subdirectory("${CMAKE_CURRENT_LIST_DIR}/third_party/curl")
-# add_subdirectory("${CMAKE_CURRENT_LIST_DIR}/third_party/libfmt" EXCLUDE_FROM_ALL)
 
 ##################################################################################
 # Adding the actual project source folder                                        #

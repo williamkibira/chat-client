@@ -10,7 +10,7 @@ ProtobufInstructionHandler::ProtobufInstructionHandler()
 void ProtobufInstructionHandler::onInstructionIssued(OutgoingInstructionCallback outgoingCallback) {
   this->outgoingCallback = outgoingCallback;
 }
-void ProtobufInstructionHandler::onReceived(ResponseType responseType, const std::vector<uint8_t> &payload)
+void ProtobufInstructionHandler::onReceived(ResponseType responseType, int length, const uint8_t *buffer)
 {
   // FOR THE TIME BEING WE CAN ASSUME THE TYPE OF INSTRUCTIONS TO BE HANDLED
   spdlog::get("chat-client")->info("RECEIVED INSTRUCTION");
@@ -29,7 +29,7 @@ void ProtobufInstructionHandler::onReceived(ResponseType responseType, const std
   } else if (responseType == ResponseType::IDENTITY_REJECTION) {
     spdlog::get("chat-client")->info("YOUR IDENTITY WAS NOT ACCEPTED");
     Failure failure;
-    failure.ParseFromArray(payload.data(), payload.size());
+    failure.ParseFromArray(buffer, length);
     spdlog::get("chat-client")->error("ERROR: {}", failure.error());
     spdlog::get("chat-client")->error("DETAILS: {}", failure.details());
     spdlog::get("chat-client")->error("OCCURRED AT: {}", TimeUtil::ToString(failure.occurred_at()));

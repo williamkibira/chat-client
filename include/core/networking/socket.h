@@ -15,7 +15,7 @@ using namespace core::definitions;
 class SocketClient: public std::enable_shared_from_this<SocketClient>
 {
 public:
-  typedef std::function<void(ResponseType, const std::vector<uint8_t> &)> InstructionReceivedCallback;
+  typedef std::function<void(ResponseType, const uint8_t *buffer, int length)> InstructionReceivedCallback;
   typedef std::function<void(const std::vector<uint8_t> &)> PayloadReceivedCallback;
   virtual void start() = 0;
   virtual void stop() = 0;

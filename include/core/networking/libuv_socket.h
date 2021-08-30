@@ -32,7 +32,7 @@ private:
   int port;
   uv_tcp_t socket;
   uv_connect_t connect;
-  uv_write_t write_request;
+  std::unique_ptr<uv_write_t> write_request;
   struct sockaddr_in dest;
   std::vector<uint8_t> read_tcp_buffer;
   std::deque<std::vector<uint8_t>> write_tcp_buffer;

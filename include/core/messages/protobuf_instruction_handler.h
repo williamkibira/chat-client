@@ -13,7 +13,7 @@ public:
   ProtobufInstructionHandler();
   ~ProtobufInstructionHandler();
   void onInstructionIssued(OutgoingInstructionCallback outgoingCallback) override;
-  void onReceived(ResponseType responseType, const std::vector<uint8_t> &payload) override;
+  void onReceived(ResponseType responseType, int length, const uint8_t *buffer) override;
   void sendIdentification(const Identification &identification) override;
   void send(RequestType requestType, const std::vector<uint8_t> &payload) override;
   void disconnect() override;
