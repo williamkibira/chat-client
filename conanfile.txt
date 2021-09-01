@@ -5,7 +5,7 @@ openssl/1.1.1k
 spdlog/1.9.2
 sqlite3/3.36.0
 fakeit/2.0.9
-asio/1.19.2
+asio/1.18.2
 cpr/1.6.2
 catch2/2.13.7
 libuv/1.41.1

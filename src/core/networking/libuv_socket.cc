@@ -32,14 +32,16 @@ void UVSocketClient::start()
 void UVSocketClient::stop()
 {
 }
-void UVSocketClient::sendPayload(RequestType requestType, const std::vector<uint8_t> &payload)
+
+void UVSocketClient::sendPayload(RequestType requestType, std::vector<uint8_t> &payload)
 {
   if (requestType == RequestType::AUDIO_OUT || requestType == RequestType::VIDEO_OUT) {
-    //THIS WILL BE HANDLED BY A SEPARATE SERVICE
+    //THIS WILL GO ONTO A UDP COMMUNICATION LINE SO JUST LOG AS NOT IMPLEMENTED
   } else {
     write_over_tcp(payload);
   }
 }
+
 void UVSocketClient::registerInstructionReceiver(InstructionReceivedCallback callback)
 {
   this->instructionReceivedCallback = callback;
@@ -49,10 +51,10 @@ void UVSocketClient::registerPayloadReceiver(PayloadReceivedCallback callback)
   this->payloadReceivedCallback = callback;
 }
 
-void UVSocketClient::write_over_tcp(const std::vector<uint8_t> &data)
+void UVSocketClient::write_over_tcp(std::vector<uint8_t> &data)
 {
   const bool write_in_progress = !write_tcp_buffer.empty();
-  write_tcp_buffer.push_back(data);
+  write_tcp_buffer.push_back(std::move(data));
   if (!write_in_progress) {
     do_tcp_write();
   }

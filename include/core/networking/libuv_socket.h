@@ -6,17 +6,18 @@
 #include <functional>
 #include <cstdlib>
 #include <uv.h>
+#include <memory>
 #include <core/networking/socket.h>
 
 namespace core::networking::socket {
-class UVSocketClient : public SocketClient
+class UVSocketClient : public SocketClient, std::enable_shared_from_this<UVSocketClient>
 {
 public:
   UVSocketClient(uv_loop_t *loop, const std::string &ip_address, int port);
   ~UVSocketClient();
   void start() override;
   void stop() override;
-  void sendPayload(RequestType requestType, const std::vector<uint8_t> &payload) override;
+  void sendPayload(RequestType requestType, std::vector<uint8_t> &payload) override;
   void registerInstructionReceiver(InstructionReceivedCallback callback) override;
   void registerPayloadReceiver(PayloadReceivedCallback callback) override;
 
@@ -24,7 +25,7 @@ private:
   static void allocate_buffer(uv_handle_t *handle, size_t suggested_size, uv_buf_t *buf);
   static void on_connect(uv_connect_t * req, int status);
   static void on_tcp_read(uv_stream_t* stream, ssize_t nread, const uv_buf_t* buffer);
-  void write_over_tcp(const std::vector<uint8_t> &data);
+  void write_over_tcp(std::vector<uint8_t> &data);
   void do_tcp_write();
   
   uv_loop_t *loop;

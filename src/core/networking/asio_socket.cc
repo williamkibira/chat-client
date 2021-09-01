@@ -2,15 +2,14 @@
 #include <spdlog/spdlog.h>
 #include <core/definitions/message_types.h>
 #include <core/definitions/header_length.h>
-
+#include <iostream>
 namespace core::networking::socket {
 AsioSocketClient::AsioSocketClient(io_context &context, tcp::resolver::results_type &tcp_endpoints) : context(context),
                                                                                                       tcp_socket(context),
                                                                                                       tcp_endpoints(tcp_endpoints),
-                                                                                                      read_tcp_buffer(0),
+                                                                                                      read_tcp_buffer(MAX_TCP_LENGTH),
                                                                                                       write_tcp_buffer(0)
 {
-  this->raw_buffer = new uint8_t[MAX_TCP_LENGTH];
 }
 
 void AsioSocketClient::start()
@@ -23,7 +22,7 @@ void AsioSocketClient::stop()
   this->stop_tcp_connect();
 }
 
-void AsioSocketClient::sendPayload(RequestType requestType, const std::vector<uint8_t> &payload)
+void AsioSocketClient::sendPayload(RequestType requestType, std::vector<uint8_t> &payload)
 {
   if (requestType == RequestType::AUDIO_OUT || requestType == RequestType::VIDEO_OUT) {
     //THIS WILL GO ONTO A UDP COMMUNICATION LINE SO JUST LOG AS NOT IMPLEMENTED
@@ -65,21 +64,18 @@ void AsioSocketClient::stop_tcp_connect()
 
 void AsioSocketClient::do_tcp_read()
 {
- try{
   asio::async_read(
     tcp_socket,
-    asio::buffer(raw_buffer, MAX_TCP_LENGTH),
+    asio::buffer(read_tcp_buffer.data(), read_tcp_buffer.size()),
     [&](const std::error_code &error, size_t bytes_transferred) -> size_t {
       if (error) {
         spdlog::get("chat-client")->error("TCP READ ERROR {}", error.message());
         return 0;
       }
-      spdlog::get("chat-client")->info("BYTES RECEIVED OVER TCP TO EVALUATE {}", bytes_transferred);
-
       if (bytes_transferred < TCP_HEADER_LENGTH) {
         return TCP_HEADER_LENGTH - bytes_transferred;
       }
-      const int payload_size = ntohl(*reinterpret_cast<uint32_t *>(raw_buffer + 2));
+      const int payload_size = ntohl(*reinterpret_cast<uint32_t *>(read_tcp_buffer.data() + 2));
       const int whole_message_length = payload_size + TCP_HEADER_LENGTH;
       size_t remaining = whole_message_length - bytes_transferred;
       remaining = std::max(remaining, (size_t)0);
@@ -90,45 +86,28 @@ void AsioSocketClient::do_tcp_read()
       if (!error) {
         if (bytes_transferred > 0) {
           spdlog::get("chat-client")->info("RECEIVED : {} TO TRANSFER AS AN INSTRUCTION", bytes_transferred);
-          auto type = static_cast<ResponseType>(ntohs(*reinterpret_cast<uint16_t *>(raw_buffer)));
+          auto type = static_cast<ResponseType>(ntohs(*reinterpret_cast<uint16_t *>(read_tcp_buffer.data())));
           if (this->instructionReceivedCallback) {
-            this->instructionReceivedCallback(type, &raw_buffer[TCP_HEADER_LENGTH], (int)bytes_transferred - TCP_HEADER_LENGTH);
+            std::vector<uint8_t> packet(read_tcp_buffer.cbegin() + TCP_HEADER_LENGTH, read_tcp_buffer.cend());
+            this->instructionReceivedCallback(type, packet);
           }
         }
         do_tcp_read();
-      } else if (error) {
+      } else {
         spdlog::get("chat-client")->error("TCP-ERROR ON READ {}", error.message());
+        tcp_socket.close();
       }
     });
- } catch(std::exception& e) {
-   spdlog::get("chat-client")->error("FAILED TO READ: {}", e.what());
- }
 }
 
-void AsioSocketClient::on_tcp_read(const std::error_code error, size_t bytes_transferred)
-{
-  if (!error) {
-    if (bytes_transferred > 0) {
-      spdlog::get("chat-client")->info("RECEIVED : {} TO TRANSFER AS AN INSTRUCTION", bytes_transferred);
-      auto type = static_cast<ResponseType>(ntohs(*reinterpret_cast<uint16_t *>(raw_buffer)));
-      if (this->instructionReceivedCallback) {
-        this->instructionReceivedCallback(type, &raw_buffer[TCP_HEADER_LENGTH], (int)bytes_transferred - TCP_HEADER_LENGTH);
-      }
-    }
-    do_tcp_read();
-  } else if (error) {
-    spdlog::get("chat-client")->error("TCP-ERROR ON READ {}", error.message());
-  }
-}
-
-void AsioSocketClient::write_over_tcp(const std::vector<uint8_t> &data)
+void AsioSocketClient::write_over_tcp(std::vector<uint8_t> &data)
 {
   // asio::post(context,
-  //   [this, data]() {
+  //   [this, &data]() {
 
   //   });
   const bool write_in_progress = !write_tcp_buffer.empty();
-  write_tcp_buffer.push_back(data);
+  write_tcp_buffer.push_back(std::move(data));
   if (!write_in_progress) {
     do_tcp_write();
   }
@@ -136,49 +115,28 @@ void AsioSocketClient::write_over_tcp(const std::vector<uint8_t> &data)
 
 void AsioSocketClient::do_tcp_write()
 {
-  // try {
-  //   spdlog::get("chat-client")->warn("DOING WRITE ON TCP SOCKET");
-  //   auto content = write_tcp_buffer.front();
-  //   asio::async_write(tcp_socket,
-  //     asio::buffer(content.data(), content.size()),
-  //     std::bind(&AsioSocketClient::on_tcp_write, this, std::placeholders::_1, std::placeholders::_2));
-  // } catch (std::exception &e) {
-  //   spdlog::get("chat-client")->error("TCP ERR:{}", e.what());
-  // }
-  spdlog::get("chat-client")->info("PERFORMING BLOCKING WRITE");
   auto content = write_tcp_buffer.front();
-  size_t written = asio::write(tcp_socket, asio::buffer(content.data(), content.size()));
-  if (written < 0) {
-    spdlog::get("chat-client")->error("WROTE LESS : {} OF {}", written, content.size());
-  } else {
-    spdlog::get("chat-client")->info("WROTE PAYLOAD OVER TCP SOCKET SIZE {}", written);
-    write_tcp_buffer.pop_front();
-    spdlog::get("chat-client")->info("POPPED THE FRONT OF THE QUEUE");
-    if (!write_tcp_buffer.empty()) {
-      do_tcp_write();
-    }
-    spdlog::get("chat-client")->info("We have no more to write");
-    do_tcp_read();
-  }
-}
-
-void AsioSocketClient::on_tcp_write(const std::error_code error, size_t bytes_transferred)
-{
-  spdlog::get("chat-client")->warn("I'M SUPPOSED TO LISTEN HERE RIGHT AFTER WRITING CORRECT {}", bytes_transferred);
-  if (!error) {
-    spdlog::get("chat-client")->info("WROTE PAYLOAD OVER TCP SOCKET SIZE {}", bytes_transferred);
-    write_tcp_buffer.pop_front();
-    if (!write_tcp_buffer.empty()) {
-      do_tcp_write();
-    }
-  } else {
-    spdlog::get("chat-client")->error("TCP WRITE FAILED {}", error.message());
-  }
+  asio::async_write(tcp_socket,
+    asio::buffer(content.data(), content.size()),
+    [this](const std::error_code& error, size_t bytes_transferred) -> void {
+      spdlog::get("chat-client")->warn("I'M SUPPOSED TO LISTEN HERE RIGHT AFTER WRITING CORRECT {}", bytes_transferred);
+      if (!error) {
+        spdlog::get("chat-client")->info("WROTE PAYLOAD OVER TCP SOCKET SIZE {}", bytes_transferred);
+        write_tcp_buffer.pop_front();
+        if (!write_tcp_buffer.empty()) {
+          do_tcp_write();
+        }
+      } else {
+        spdlog::get("chat-client")->error("TCP WRITE FAILED {}", error.message());
+        tcp_socket.close();
+      }
+    });
 }
 
 AsioSocketClient::~AsioSocketClient()
 {
-  delete[] raw_buffer;
+  read_tcp_buffer.clear();
+  write_tcp_buffer.clear();
 }
 
 };// namespace core::networking::socket
