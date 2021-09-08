@@ -8,8 +8,10 @@
 #include <core/networking/asio_socket.h>
 #include <core/networking/libuv_socket.h>
 #include <core/messages/protobuf_instruction_handler.h>
+#include <core/networking/cpr_http_handler.h>
 #include <chrono>
 using namespace core::networking::socket;
+using namespace core::networking::http;
 using namespace core::messages;
 
 auto main(int argc, char **argv) -> int
@@ -48,7 +50,27 @@ auto main(int argc, char **argv) -> int
   try {
     client->start();
     console->info("STARTING APPLICATION");
-    
+    CPRHttpHandler httpHandler(
+      std::string("http://localhost:5000/api/v1/account-service/accounts"),
+      std::string("http://localhost:5100/api/v1/authorization-service")
+    );
+    console->info("MAKE REGISTRATION PAYLOAD");
+    RegistrationDetails registrationDetails;
+    registrationDetails.set_email("williamkibira@gmail.com");
+    registrationDetails.set_first_name("William");
+    registrationDetails.set_last_name("Bruno");
+    registrationDetails.set_password("willnux90");
+    registrationDetails.add_roles("PARTICIPANT");
+    registrationDetails.set_photo(std::string("XXXX"));
+    registrationDetails.set_photo_content_type("image/jpeg");
+    console->info("SERIALIZE REGISTRATION PAYLOAD");
+    httpHandler.register_user(registrationDetails, [&](std::optional<std::string> id, const std::string& error) -> void {
+      if(!error.empty()) {
+        console->error("FAILED TO REGISTER : {}", error);
+      } else if(id.has_value()) {
+        console->info("USER REFERENCE: {}", id.value());
+      }
+    });
     while (true) {
      // context.run();
      uv_run(&loop, UV_RUN_DEFAULT);

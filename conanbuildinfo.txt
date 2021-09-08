@@ -1,66 +1,66 @@
 [includedirs]
-C:/.conan/469829/1/include
+C:/.conan/d57207/1/include
 C:/Users/acera/.conan/data/spdlog/1.9.2/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include
-C:/Users/acera/.conan/data/sqlite3/3.36.0/_/_/package/5e2ee2bbbf247701a335de1962053720f3cbabf1/include
-C:/Users/acera/.conan/data/fakeit/2.0.9/_/_/package/e3599e3d6f1ce6df0f0966d785069a7b2ad4b7af/include
+C:/Users/acera/.conan/data/sqlite3/3.36.0/_/_/package/050fb3a4d3559ab088bce91739e61889c28839d1/include
+C:/Users/acera/.conan/data/fakeit/2.0.9/_/_/package/8307d047cfc52dc55b625be407a79abc2ff9946d/include
 C:/Users/acera/.conan/data/asio/1.18.2/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include
-C:/Users/acera/.conan/data/cpr/1.6.2/_/_/package/6a6dea2ce02343410a2f5fdf1bbd3202053cce1e/include
-C:/Users/acera/.conan/data/libuv/1.41.1/_/_/package/d057732059ea44a47760900cb5e4855d2bea8714/include
-C:/Users/acera/.conan/data/fmt/8.0.1/_/_/package/8ed2451fe8e6a2dd1b2f8bac3c035717ff9ddfa8/include
+C:/Users/acera/.conan/data/cpr/1.6.2/_/_/package/f0e243958d18eafbe001ceac9a46fed4f01cf76c/include
+C:/Users/acera/.conan/data/libuv/1.41.1/_/_/package/3fb49604f9c2f729b85ba3115852006824e72cab/include
+C:/Users/acera/.conan/data/fmt/8.0.1/_/_/package/2be90237c5e294c2f30bf6b043d047624b893db3/include
 C:/Users/acera/.conan/data/catch2/2.13.7/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include
-C:/Users/acera/.conan/data/libcurl/7.69.1/_/_/package/acf2cc4d3f626112de943cd43ed238fd846c0cda/include
-C:/Users/acera/.conan/data/zlib/1.2.11/_/_/package/d057732059ea44a47760900cb5e4855d2bea8714/include
-C:/Users/acera/.conan/data/openssl/1.1.1k/_/_/package/d057732059ea44a47760900cb5e4855d2bea8714/include
+C:/Users/acera/.conan/data/libcurl/7.69.1/_/_/package/8f024c1f1c603ad0762d5cdb497d134bf493464e/include
+C:/Users/acera/.conan/data/zlib/1.2.11/_/_/package/3fb49604f9c2f729b85ba3115852006824e72cab/include
+C:/Users/acera/.conan/data/openssl/1.1.1k/_/_/package/3fb49604f9c2f729b85ba3115852006824e72cab/include
 
 [libdirs]
-C:/.conan/469829/1/lib
-C:/Users/acera/.conan/data/sqlite3/3.36.0/_/_/package/5e2ee2bbbf247701a335de1962053720f3cbabf1/lib
-C:/Users/acera/.conan/data/cpr/1.6.2/_/_/package/6a6dea2ce02343410a2f5fdf1bbd3202053cce1e/lib
-C:/Users/acera/.conan/data/libuv/1.41.1/_/_/package/d057732059ea44a47760900cb5e4855d2bea8714/lib
-C:/Users/acera/.conan/data/fmt/8.0.1/_/_/package/8ed2451fe8e6a2dd1b2f8bac3c035717ff9ddfa8/lib
+C:/.conan/d57207/1/lib
+C:/Users/acera/.conan/data/sqlite3/3.36.0/_/_/package/050fb3a4d3559ab088bce91739e61889c28839d1/lib
+C:/Users/acera/.conan/data/cpr/1.6.2/_/_/package/f0e243958d18eafbe001ceac9a46fed4f01cf76c/lib
+C:/Users/acera/.conan/data/libuv/1.41.1/_/_/package/3fb49604f9c2f729b85ba3115852006824e72cab/lib
+C:/Users/acera/.conan/data/fmt/8.0.1/_/_/package/2be90237c5e294c2f30bf6b043d047624b893db3/lib
 C:/Users/acera/.conan/data/catch2/2.13.7/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/lib
-C:/Users/acera/.conan/data/libcurl/7.69.1/_/_/package/acf2cc4d3f626112de943cd43ed238fd846c0cda/lib
-C:/Users/acera/.conan/data/zlib/1.2.11/_/_/package/d057732059ea44a47760900cb5e4855d2bea8714/lib
-C:/Users/acera/.conan/data/openssl/1.1.1k/_/_/package/d057732059ea44a47760900cb5e4855d2bea8714/lib
+C:/Users/acera/.conan/data/libcurl/7.69.1/_/_/package/8f024c1f1c603ad0762d5cdb497d134bf493464e/lib
+C:/Users/acera/.conan/data/zlib/1.2.11/_/_/package/3fb49604f9c2f729b85ba3115852006824e72cab/lib
+C:/Users/acera/.conan/data/openssl/1.1.1k/_/_/package/3fb49604f9c2f729b85ba3115852006824e72cab/lib
 
 [bindirs]
-C:/.conan/469829/1/bin
-C:/Users/acera/.conan/data/sqlite3/3.36.0/_/_/package/5e2ee2bbbf247701a335de1962053720f3cbabf1/bin
-C:/Users/acera/.conan/data/libcurl/7.69.1/_/_/package/acf2cc4d3f626112de943cd43ed238fd846c0cda/bin
-C:/Users/acera/.conan/data/openssl/1.1.1k/_/_/package/d057732059ea44a47760900cb5e4855d2bea8714/bin
+C:/.conan/d57207/1/bin
+C:/Users/acera/.conan/data/sqlite3/3.36.0/_/_/package/050fb3a4d3559ab088bce91739e61889c28839d1/bin
+C:/Users/acera/.conan/data/libcurl/7.69.1/_/_/package/8f024c1f1c603ad0762d5cdb497d134bf493464e/bin
+C:/Users/acera/.conan/data/openssl/1.1.1k/_/_/package/3fb49604f9c2f729b85ba3115852006824e72cab/bin
 
 [resdirs]
-C:/Users/acera/.conan/data/libcurl/7.69.1/_/_/package/acf2cc4d3f626112de943cd43ed238fd846c0cda/res
+C:/Users/acera/.conan/data/libcurl/7.69.1/_/_/package/8f024c1f1c603ad0762d5cdb497d134bf493464e/res
 
 [builddirs]
-C:/.conan/469829/1/
-C:/.conan/469829/1/lib/cmake/protobuf
+C:/.conan/d57207/1/
+C:/.conan/d57207/1/lib/cmake/protobuf
 C:/Users/acera/.conan/data/spdlog/1.9.2/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/
-C:/Users/acera/.conan/data/sqlite3/3.36.0/_/_/package/5e2ee2bbbf247701a335de1962053720f3cbabf1/
-C:/Users/acera/.conan/data/sqlite3/3.36.0/_/_/package/5e2ee2bbbf247701a335de1962053720f3cbabf1/lib/cmake
-C:/Users/acera/.conan/data/fakeit/2.0.9/_/_/package/e3599e3d6f1ce6df0f0966d785069a7b2ad4b7af/
+C:/Users/acera/.conan/data/sqlite3/3.36.0/_/_/package/050fb3a4d3559ab088bce91739e61889c28839d1/
+C:/Users/acera/.conan/data/sqlite3/3.36.0/_/_/package/050fb3a4d3559ab088bce91739e61889c28839d1/lib/cmake
+C:/Users/acera/.conan/data/fakeit/2.0.9/_/_/package/8307d047cfc52dc55b625be407a79abc2ff9946d/
 C:/Users/acera/.conan/data/asio/1.18.2/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/
-C:/Users/acera/.conan/data/cpr/1.6.2/_/_/package/6a6dea2ce02343410a2f5fdf1bbd3202053cce1e/
-C:/Users/acera/.conan/data/libuv/1.41.1/_/_/package/d057732059ea44a47760900cb5e4855d2bea8714/
-C:/Users/acera/.conan/data/fmt/8.0.1/_/_/package/8ed2451fe8e6a2dd1b2f8bac3c035717ff9ddfa8/
+C:/Users/acera/.conan/data/cpr/1.6.2/_/_/package/f0e243958d18eafbe001ceac9a46fed4f01cf76c/
+C:/Users/acera/.conan/data/libuv/1.41.1/_/_/package/3fb49604f9c2f729b85ba3115852006824e72cab/
+C:/Users/acera/.conan/data/fmt/8.0.1/_/_/package/2be90237c5e294c2f30bf6b043d047624b893db3/
 C:/Users/acera/.conan/data/catch2/2.13.7/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/lib/cmake/Catch2
-C:/Users/acera/.conan/data/libcurl/7.69.1/_/_/package/acf2cc4d3f626112de943cd43ed238fd846c0cda/
-C:/Users/acera/.conan/data/zlib/1.2.11/_/_/package/d057732059ea44a47760900cb5e4855d2bea8714/
-C:/Users/acera/.conan/data/openssl/1.1.1k/_/_/package/d057732059ea44a47760900cb5e4855d2bea8714/
-C:/Users/acera/.conan/data/openssl/1.1.1k/_/_/package/d057732059ea44a47760900cb5e4855d2bea8714/lib/cmake
+C:/Users/acera/.conan/data/libcurl/7.69.1/_/_/package/8f024c1f1c603ad0762d5cdb497d134bf493464e/
+C:/Users/acera/.conan/data/zlib/1.2.11/_/_/package/3fb49604f9c2f729b85ba3115852006824e72cab/
+C:/Users/acera/.conan/data/openssl/1.1.1k/_/_/package/3fb49604f9c2f729b85ba3115852006824e72cab/
+C:/Users/acera/.conan/data/openssl/1.1.1k/_/_/package/3fb49604f9c2f729b85ba3115852006824e72cab/lib/cmake
 
 [libs]
-libprotocd
-libprotobufd
-libprotobuf-lited
+libprotoc
+libprotobuf
+libprotobuf-lite
 sqlite3
 cpr
 uv_a
-fmtd
+fmt
 libcurl
 zlib
-libssld
-libcryptod
+libssl
+libcrypto
 
 [system_libs]
 iphlpapi
@@ -102,25 +102,25 @@ SPDLOG_FMT_EXTERNAL
 
 
 [includedirs_protobuf]
-C:/.conan/469829/1/include
+C:/.conan/d57207/1/include
 
 [libdirs_protobuf]
-C:/.conan/469829/1/lib
+C:/.conan/d57207/1/lib
 
 [bindirs_protobuf]
-C:/.conan/469829/1/bin
+C:/.conan/d57207/1/bin
 
 [resdirs_protobuf]
 
 
 [builddirs_protobuf]
-C:/.conan/469829/1/
-C:/.conan/469829/1/lib/cmake/protobuf
+C:/.conan/d57207/1/
+C:/.conan/d57207/1/lib/cmake/protobuf
 
 [libs_protobuf]
-libprotocd
-libprotobufd
-libprotobuf-lited
+libprotoc
+libprotobuf
+libprotobuf-lite
 
 [system_libs_protobuf]
 
@@ -153,7 +153,7 @@ libprotobuf-lited
 
 
 [rootpath_protobuf]
-C:/.conan/469829/1
+C:/.conan/d57207/1
 
 [name_protobuf]
 protobuf
@@ -236,20 +236,20 @@ spdlog
 
 
 [includedirs_sqlite3]
-C:/Users/acera/.conan/data/sqlite3/3.36.0/_/_/package/5e2ee2bbbf247701a335de1962053720f3cbabf1/include
+C:/Users/acera/.conan/data/sqlite3/3.36.0/_/_/package/050fb3a4d3559ab088bce91739e61889c28839d1/include
 
 [libdirs_sqlite3]
-C:/Users/acera/.conan/data/sqlite3/3.36.0/_/_/package/5e2ee2bbbf247701a335de1962053720f3cbabf1/lib
+C:/Users/acera/.conan/data/sqlite3/3.36.0/_/_/package/050fb3a4d3559ab088bce91739e61889c28839d1/lib
 
 [bindirs_sqlite3]
-C:/Users/acera/.conan/data/sqlite3/3.36.0/_/_/package/5e2ee2bbbf247701a335de1962053720f3cbabf1/bin
+C:/Users/acera/.conan/data/sqlite3/3.36.0/_/_/package/050fb3a4d3559ab088bce91739e61889c28839d1/bin
 
 [resdirs_sqlite3]
 
 
 [builddirs_sqlite3]
-C:/Users/acera/.conan/data/sqlite3/3.36.0/_/_/package/5e2ee2bbbf247701a335de1962053720f3cbabf1/
-C:/Users/acera/.conan/data/sqlite3/3.36.0/_/_/package/5e2ee2bbbf247701a335de1962053720f3cbabf1/lib/cmake
+C:/Users/acera/.conan/data/sqlite3/3.36.0/_/_/package/050fb3a4d3559ab088bce91739e61889c28839d1/
+C:/Users/acera/.conan/data/sqlite3/3.36.0/_/_/package/050fb3a4d3559ab088bce91739e61889c28839d1/lib/cmake
 
 [libs_sqlite3]
 sqlite3
@@ -285,7 +285,7 @@ sqlite3
 
 
 [rootpath_sqlite3]
-C:/Users/acera/.conan/data/sqlite3/3.36.0/_/_/package/5e2ee2bbbf247701a335de1962053720f3cbabf1
+C:/Users/acera/.conan/data/sqlite3/3.36.0/_/_/package/050fb3a4d3559ab088bce91739e61889c28839d1
 
 [name_sqlite3]
 sqlite3
@@ -303,7 +303,7 @@ cmake_find_package_multi=SQLite3
 
 
 [includedirs_fakeit]
-C:/Users/acera/.conan/data/fakeit/2.0.9/_/_/package/e3599e3d6f1ce6df0f0966d785069a7b2ad4b7af/include
+C:/Users/acera/.conan/data/fakeit/2.0.9/_/_/package/8307d047cfc52dc55b625be407a79abc2ff9946d/include
 
 [libdirs_fakeit]
 
@@ -315,7 +315,7 @@ C:/Users/acera/.conan/data/fakeit/2.0.9/_/_/package/e3599e3d6f1ce6df0f0966d78506
 
 
 [builddirs_fakeit]
-C:/Users/acera/.conan/data/fakeit/2.0.9/_/_/package/e3599e3d6f1ce6df0f0966d785069a7b2ad4b7af/
+C:/Users/acera/.conan/data/fakeit/2.0.9/_/_/package/8307d047cfc52dc55b625be407a79abc2ff9946d/
 
 [libs_fakeit]
 
@@ -351,7 +351,7 @@ C:/Users/acera/.conan/data/fakeit/2.0.9/_/_/package/e3599e3d6f1ce6df0f0966d78506
 
 
 [rootpath_fakeit]
-C:/Users/acera/.conan/data/fakeit/2.0.9/_/_/package/e3599e3d6f1ce6df0f0966d785069a7b2ad4b7af
+C:/Users/acera/.conan/data/fakeit/2.0.9/_/_/package/8307d047cfc52dc55b625be407a79abc2ff9946d
 
 [name_fakeit]
 fakeit
@@ -431,10 +431,10 @@ asio
 
 
 [includedirs_cpr]
-C:/Users/acera/.conan/data/cpr/1.6.2/_/_/package/6a6dea2ce02343410a2f5fdf1bbd3202053cce1e/include
+C:/Users/acera/.conan/data/cpr/1.6.2/_/_/package/f0e243958d18eafbe001ceac9a46fed4f01cf76c/include
 
 [libdirs_cpr]
-C:/Users/acera/.conan/data/cpr/1.6.2/_/_/package/6a6dea2ce02343410a2f5fdf1bbd3202053cce1e/lib
+C:/Users/acera/.conan/data/cpr/1.6.2/_/_/package/f0e243958d18eafbe001ceac9a46fed4f01cf76c/lib
 
 [bindirs_cpr]
 
@@ -443,7 +443,7 @@ C:/Users/acera/.conan/data/cpr/1.6.2/_/_/package/6a6dea2ce02343410a2f5fdf1bbd320
 
 
 [builddirs_cpr]
-C:/Users/acera/.conan/data/cpr/1.6.2/_/_/package/6a6dea2ce02343410a2f5fdf1bbd3202053cce1e/
+C:/Users/acera/.conan/data/cpr/1.6.2/_/_/package/f0e243958d18eafbe001ceac9a46fed4f01cf76c/
 
 [libs_cpr]
 cpr
@@ -479,7 +479,7 @@ cpr
 
 
 [rootpath_cpr]
-C:/Users/acera/.conan/data/cpr/1.6.2/_/_/package/6a6dea2ce02343410a2f5fdf1bbd3202053cce1e
+C:/Users/acera/.conan/data/cpr/1.6.2/_/_/package/f0e243958d18eafbe001ceac9a46fed4f01cf76c
 
 [name_cpr]
 cpr
@@ -495,10 +495,10 @@ cpr
 
 
 [includedirs_libuv]
-C:/Users/acera/.conan/data/libuv/1.41.1/_/_/package/d057732059ea44a47760900cb5e4855d2bea8714/include
+C:/Users/acera/.conan/data/libuv/1.41.1/_/_/package/3fb49604f9c2f729b85ba3115852006824e72cab/include
 
 [libdirs_libuv]
-C:/Users/acera/.conan/data/libuv/1.41.1/_/_/package/d057732059ea44a47760900cb5e4855d2bea8714/lib
+C:/Users/acera/.conan/data/libuv/1.41.1/_/_/package/3fb49604f9c2f729b85ba3115852006824e72cab/lib
 
 [bindirs_libuv]
 
@@ -507,7 +507,7 @@ C:/Users/acera/.conan/data/libuv/1.41.1/_/_/package/d057732059ea44a47760900cb5e4
 
 
 [builddirs_libuv]
-C:/Users/acera/.conan/data/libuv/1.41.1/_/_/package/d057732059ea44a47760900cb5e4855d2bea8714/
+C:/Users/acera/.conan/data/libuv/1.41.1/_/_/package/3fb49604f9c2f729b85ba3115852006824e72cab/
 
 [libs_libuv]
 uv_a
@@ -546,7 +546,7 @@ ws2_32
 
 
 [rootpath_libuv]
-C:/Users/acera/.conan/data/libuv/1.41.1/_/_/package/d057732059ea44a47760900cb5e4855d2bea8714
+C:/Users/acera/.conan/data/libuv/1.41.1/_/_/package/3fb49604f9c2f729b85ba3115852006824e72cab
 
 [name_libuv]
 libuv
@@ -562,10 +562,10 @@ pkg_config=libuv
 
 
 [includedirs_fmt]
-C:/Users/acera/.conan/data/fmt/8.0.1/_/_/package/8ed2451fe8e6a2dd1b2f8bac3c035717ff9ddfa8/include
+C:/Users/acera/.conan/data/fmt/8.0.1/_/_/package/2be90237c5e294c2f30bf6b043d047624b893db3/include
 
 [libdirs_fmt]
-C:/Users/acera/.conan/data/fmt/8.0.1/_/_/package/8ed2451fe8e6a2dd1b2f8bac3c035717ff9ddfa8/lib
+C:/Users/acera/.conan/data/fmt/8.0.1/_/_/package/2be90237c5e294c2f30bf6b043d047624b893db3/lib
 
 [bindirs_fmt]
 
@@ -574,10 +574,10 @@ C:/Users/acera/.conan/data/fmt/8.0.1/_/_/package/8ed2451fe8e6a2dd1b2f8bac3c03571
 
 
 [builddirs_fmt]
-C:/Users/acera/.conan/data/fmt/8.0.1/_/_/package/8ed2451fe8e6a2dd1b2f8bac3c035717ff9ddfa8/
+C:/Users/acera/.conan/data/fmt/8.0.1/_/_/package/2be90237c5e294c2f30bf6b043d047624b893db3/
 
 [libs_fmt]
-fmtd
+fmt
 
 [system_libs_fmt]
 
@@ -610,7 +610,7 @@ fmtd
 
 
 [rootpath_fmt]
-C:/Users/acera/.conan/data/fmt/8.0.1/_/_/package/8ed2451fe8e6a2dd1b2f8bac3c035717ff9ddfa8
+C:/Users/acera/.conan/data/fmt/8.0.1/_/_/package/2be90237c5e294c2f30bf6b043d047624b893db3
 
 [name_fmt]
 fmt
@@ -693,19 +693,19 @@ cmake_find_package_multi=Catch2
 
 
 [includedirs_libcurl]
-C:/Users/acera/.conan/data/libcurl/7.69.1/_/_/package/acf2cc4d3f626112de943cd43ed238fd846c0cda/include
+C:/Users/acera/.conan/data/libcurl/7.69.1/_/_/package/8f024c1f1c603ad0762d5cdb497d134bf493464e/include
 
 [libdirs_libcurl]
-C:/Users/acera/.conan/data/libcurl/7.69.1/_/_/package/acf2cc4d3f626112de943cd43ed238fd846c0cda/lib
+C:/Users/acera/.conan/data/libcurl/7.69.1/_/_/package/8f024c1f1c603ad0762d5cdb497d134bf493464e/lib
 
 [bindirs_libcurl]
-C:/Users/acera/.conan/data/libcurl/7.69.1/_/_/package/acf2cc4d3f626112de943cd43ed238fd846c0cda/bin
+C:/Users/acera/.conan/data/libcurl/7.69.1/_/_/package/8f024c1f1c603ad0762d5cdb497d134bf493464e/bin
 
 [resdirs_libcurl]
-C:/Users/acera/.conan/data/libcurl/7.69.1/_/_/package/acf2cc4d3f626112de943cd43ed238fd846c0cda/res
+C:/Users/acera/.conan/data/libcurl/7.69.1/_/_/package/8f024c1f1c603ad0762d5cdb497d134bf493464e/res
 
 [builddirs_libcurl]
-C:/Users/acera/.conan/data/libcurl/7.69.1/_/_/package/acf2cc4d3f626112de943cd43ed238fd846c0cda/
+C:/Users/acera/.conan/data/libcurl/7.69.1/_/_/package/8f024c1f1c603ad0762d5cdb497d134bf493464e/
 
 [libs_libcurl]
 libcurl
@@ -741,7 +741,7 @@ CURL_STATICLIB=1
 
 
 [rootpath_libcurl]
-C:/Users/acera/.conan/data/libcurl/7.69.1/_/_/package/acf2cc4d3f626112de943cd43ed238fd846c0cda
+C:/Users/acera/.conan/data/libcurl/7.69.1/_/_/package/8f024c1f1c603ad0762d5cdb497d134bf493464e
 
 [name_libcurl]
 libcurl
@@ -759,10 +759,10 @@ pkg_config=libcurl
 
 
 [includedirs_zlib]
-C:/Users/acera/.conan/data/zlib/1.2.11/_/_/package/d057732059ea44a47760900cb5e4855d2bea8714/include
+C:/Users/acera/.conan/data/zlib/1.2.11/_/_/package/3fb49604f9c2f729b85ba3115852006824e72cab/include
 
 [libdirs_zlib]
-C:/Users/acera/.conan/data/zlib/1.2.11/_/_/package/d057732059ea44a47760900cb5e4855d2bea8714/lib
+C:/Users/acera/.conan/data/zlib/1.2.11/_/_/package/3fb49604f9c2f729b85ba3115852006824e72cab/lib
 
 [bindirs_zlib]
 
@@ -771,7 +771,7 @@ C:/Users/acera/.conan/data/zlib/1.2.11/_/_/package/d057732059ea44a47760900cb5e48
 
 
 [builddirs_zlib]
-C:/Users/acera/.conan/data/zlib/1.2.11/_/_/package/d057732059ea44a47760900cb5e4855d2bea8714/
+C:/Users/acera/.conan/data/zlib/1.2.11/_/_/package/3fb49604f9c2f729b85ba3115852006824e72cab/
 
 [libs_zlib]
 zlib
@@ -807,7 +807,7 @@ zlib
 
 
 [rootpath_zlib]
-C:/Users/acera/.conan/data/zlib/1.2.11/_/_/package/d057732059ea44a47760900cb5e4855d2bea8714
+C:/Users/acera/.conan/data/zlib/1.2.11/_/_/package/3fb49604f9c2f729b85ba3115852006824e72cab
 
 [name_zlib]
 zlib
@@ -824,24 +824,24 @@ cmake_find_package_multi=ZLIB
 
 
 [includedirs_openssl]
-C:/Users/acera/.conan/data/openssl/1.1.1k/_/_/package/d057732059ea44a47760900cb5e4855d2bea8714/include
+C:/Users/acera/.conan/data/openssl/1.1.1k/_/_/package/3fb49604f9c2f729b85ba3115852006824e72cab/include
 
 [libdirs_openssl]
-C:/Users/acera/.conan/data/openssl/1.1.1k/_/_/package/d057732059ea44a47760900cb5e4855d2bea8714/lib
+C:/Users/acera/.conan/data/openssl/1.1.1k/_/_/package/3fb49604f9c2f729b85ba3115852006824e72cab/lib
 
 [bindirs_openssl]
-C:/Users/acera/.conan/data/openssl/1.1.1k/_/_/package/d057732059ea44a47760900cb5e4855d2bea8714/bin
+C:/Users/acera/.conan/data/openssl/1.1.1k/_/_/package/3fb49604f9c2f729b85ba3115852006824e72cab/bin
 
 [resdirs_openssl]
 
 
 [builddirs_openssl]
-C:/Users/acera/.conan/data/openssl/1.1.1k/_/_/package/d057732059ea44a47760900cb5e4855d2bea8714/
-C:/Users/acera/.conan/data/openssl/1.1.1k/_/_/package/d057732059ea44a47760900cb5e4855d2bea8714/lib/cmake
+C:/Users/acera/.conan/data/openssl/1.1.1k/_/_/package/3fb49604f9c2f729b85ba3115852006824e72cab/
+C:/Users/acera/.conan/data/openssl/1.1.1k/_/_/package/3fb49604f9c2f729b85ba3115852006824e72cab/lib/cmake
 
 [libs_openssl]
-libssld
-libcryptod
+libssl
+libcrypto
 
 [system_libs_openssl]
 crypt32
@@ -877,7 +877,7 @@ user32
 
 
 [rootpath_openssl]
-C:/Users/acera/.conan/data/openssl/1.1.1k/_/_/package/d057732059ea44a47760900cb5e4855d2bea8714
+C:/Users/acera/.conan/data/openssl/1.1.1k/_/_/package/3fb49604f9c2f729b85ba3115852006824e72cab
 
 [name_openssl]
 openssl
@@ -906,10 +906,10 @@ cmake_find_package_multi=OpenSSL
 [USER_sqlite3]
 [USER_zlib]
 [ENV_protobuf]
-PATH=["C:\.conan\469829\1\bin"]
+PATH=["C:\.conan\d57207\1\bin"]
 [ENV_spdlog]
 [ENV_sqlite3]
-PATH=["C:\Users\acera\.conan\data\sqlite3\3.36.0\_\_\package\5e2ee2bbbf247701a335de1962053720f3cbabf1\bin"]
+PATH=["C:\Users\acera\.conan\data\sqlite3\3.36.0\_\_\package\050fb3a4d3559ab088bce91739e61889c28839d1\bin"]
 [ENV_fakeit]
 [ENV_asio]
 [ENV_cpr]

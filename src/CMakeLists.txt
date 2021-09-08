@@ -13,6 +13,7 @@ endif()
 add_executable(${PROJECT_NAME} 
                 main.cc 
                 core/networking/libuv_socket.cc
+                core/networking/cpr_http_handler.cc
                 core/messages/protobuf_instruction_handler.cc
                 )
 
@@ -21,6 +22,7 @@ target_link_libraries(${PROJECT_NAME}
                        protocols
                        identification
                        responses
+                       authentication
                        CONAN_PKG::fmt
                        CONAN_PKG::spdlog
                        CONAN_PKG::cpr
