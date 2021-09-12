@@ -6,77 +6,91 @@
 #include <iostream>
 #include <string>
 #include <core/networking/asio_socket.h>
-#include <core/networking/libuv_socket.h>
 #include <core/messages/protobuf_instruction_handler.h>
 #include <core/networking/cpr_http_handler.h>
 #include <chrono>
+#include <google/protobuf/util/time_util.h>
+
 using namespace core::networking::socket;
 using namespace core::networking::http;
 using namespace core::messages;
+using namespace google::protobuf::util;
 
 auto main(int argc, char **argv) -> int
 {
-  #ifdef _WIN32
-		// probably bug:
-		// src/win/winapi.c assumes
-		// that advapi32.dll has been already loaded,
-		// so load it before using anything from winapi.c
-		// for static build
-		LoadLibrary("advapi32.dll");
-	#endif
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   auto console = spdlog::stdout_color_mt("chat-client");
-  console->info("LIB UV TRIAL");
-  uv_loop_t loop;
-  uv_loop_init(&loop);
-  console->info("LOOP INITIALIZED");
-  auto client = std::make_shared<UVSocketClient>(&loop, std::string("127.0.0.1"), 5200);
-  console->info("CREATED CLIENT INSTANCE");
+  asio::io_context context;
+  asio::ip::tcp::resolver tcp_resolver(context);
+  auto tcp_endpoints = tcp_resolver.resolve(asio::ip::tcp::v4(), "127.0.0.1", "5200");
+  auto client = std::make_shared<AsioSocketClient>(context, tcp_endpoints);
+  CPRHttpHandler httpHandler(
+    std::string("http://localhost:5000/api/v1/account-service/accounts"),
+    std::string("http://localhost:5100/api/v1/authorization-service"));
   ProtobufInstructionHandler instructor;
 
-  client->registerInstructionReceiver([&instructor, &console](ResponseType responseType, const std::vector<uint8_t> &payload) {
-    console->info("GOT INSTRUCTION");
-    instructor.onReceived(responseType, payload);
+  client->registerInstructionReceiver([&instructor, &console, &httpHandler](ResponseType responseType, const std::vector<uint8_t> &payload) {
+    // FOR THE TIME BEING WE CAN ASSUME THE TYPE OF INSTRUCTIONS TO BE HANDLED
+    if (responseType == ResponseType::REQUEST_IDENTITY) {
+      console->info("SERVER IS REQUESTING CLIENT IDENTITY");
+      Credentials credentials;
+      credentials.set_email("williamkibira@gmail.com");
+      credentials.set_password("willnux90");
+      credentials.set_device_id("DELL XPS 15: HOME PC");
+      httpHandler.fetch_session(credentials, [&](std::optional<UserDetails> user_details, const std::string &error) {
+        if (user_details.has_value()) {
+          Identification identification;
+          auto *device = new Device();
+          device->set_name("WINDOWS DEV");
+          device->set_operating_system("WINDOWS 10 HOME EDITION");
+          device->set_version("20H10");
+          device->set_ip_address("127.0.0.1");
+          identification.set_token(httpHandler.fetch_current_token());
+          identification.set_allocated_device(device);
+          console->info("SENDING IDENTIFICATION TO SERVER");
+          instructor.sendIdentification(identification);
+        } else {
+          console->error("ERROR: {}", error);
+        }
+      });
+    } else if (responseType == ResponseType::IDENTITY_REJECTION) {
+      console->info("YOUR IDENTITY WAS NOT ACCEPTED");
+      Failure failure;
+      failure.ParseFromArray(payload.data(), payload.size());
+      console->error("ERROR: {}", failure.error());
+      console->error("DETAILS: {}", failure.details());
+      console->error("OCCURRED AT: {}", TimeUtil::ToString(failure.occurred_at()));
+      instructor.disconnect();
+    } else if (responseType == ResponseType::IDENTITY_ACCEPTED) {
+      Info success;
+      success.ParseFromArray(payload.data(), payload.size());
+      console->info("MESSAGE: {}", success.message());
+      console->info("DETAILS: {}", success.details());
+      console->info("OCCURRED AT: {}", TimeUtil::ToString(success.occurred_at()));
+    } else if (responseType == ResponseType::DISCONNECTION_ACCEPTED) {
+      Info success;
+      success.ParseFromArray(payload.data(), payload.size());
+      console->info("MESSAGE: {}", success.message());
+      console->info("DETAILS: {}", success.details());
+      console->info("OCCURRED AT: {}", TimeUtil::ToString(success.occurred_at()));
+    }
   });
 
   client->registerPayloadReceiver([&](const std::vector<uint8_t> &payload) {
-    //TODO: We will not be handling any TCP/IP payloads at this point
+    //TODO: We will not be handling any UDP/IP payloads at this point
   });
+
   instructor.onInstructionIssued([&console, &client](RequestType requestType, std::vector<uint8_t> &payload) {
-    console->info("SENDING REQUEST");
     client->sendPayload(requestType, payload);
   });
   try {
     client->start();
     console->info("STARTING APPLICATION");
-    CPRHttpHandler httpHandler(
-      std::string("http://localhost:5000/api/v1/account-service/accounts"),
-      std::string("http://localhost:5100/api/v1/authorization-service")
-    );
-    console->info("MAKE REGISTRATION PAYLOAD");
-    RegistrationDetails registrationDetails;
-    registrationDetails.set_email("williamkibira@gmail.com");
-    registrationDetails.set_first_name("William");
-    registrationDetails.set_last_name("Bruno");
-    registrationDetails.set_password("willnux90");
-    registrationDetails.add_roles("PARTICIPANT");
-    registrationDetails.set_photo(std::string("XXXX"));
-    registrationDetails.set_photo_content_type("image/jpeg");
-    console->info("SERIALIZE REGISTRATION PAYLOAD");
-    httpHandler.register_user(registrationDetails, [&](std::optional<std::string> id, const std::string& error) -> void {
-      if(!error.empty()) {
-        console->error("FAILED TO REGISTER : {}", error);
-      } else if(id.has_value()) {
-        console->info("USER REFERENCE: {}", id.value());
-      }
-    });
     while (true) {
-     // context.run();
-     uv_run(&loop, UV_RUN_DEFAULT);
+      context.run();
     }
     client->stop();
-    console->info("WHAT'S KILLING YOU");
   } catch (std::exception &e) {
     console->error("FAILED: {}", e.what());
   }

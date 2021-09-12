@@ -19,14 +19,14 @@ void CPRHttpHandler::fetch_session(const Credentials &credentials, FetchSessionC
     cpr::Body(content),
     cpr::Header{ { "Content-Type", "application/x-protobuf" } });
   if (response.status_code != 200) {
-    fetchSessionCallback(std::nullopt, response.error.message);
+    fetchSessionCallback(std::nullopt, response.text);
   } else {
     this->token.clear_token();
     this->token.ParseFromString(response.text);
     response = cpr::Get(cpr::Url{ fmt::format("{0}{1}", _authorization_base_url, "/user-details") },
       cpr::Bearer{ token.token() });
     if (response.status_code != 200) {
-      fetchSessionCallback(std::nullopt, response.error.message);
+      fetchSessionCallback(std::nullopt, response.text);
     } else {
       UserDetails details;
       details.ParseFromString(response.text);
