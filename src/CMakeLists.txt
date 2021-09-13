@@ -23,6 +23,8 @@ target_link_libraries(${PROJECT_NAME}
                        identification
                        responses
                        authentication
+                       contacts
+                       messages
                        CONAN_PKG::fmt
                        CONAN_PKG::spdlog
                        CONAN_PKG::cpr

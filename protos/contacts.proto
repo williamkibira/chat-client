@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+message ContactRequest {
+    string value = 1;
+    ContactType type = 2;
+    enum ContactType {
+        EMAIL=0;
+        PHONE=1;
+    }
+}
+message BatchContactMatchRequest {
+    repeated ContactRequest requests = 1;
+}
+
+message Contact {
+    string nickname = 1;
+    string identifier = 2;
+    string profile_picture_url = 3;
+}
+
+message BatchContactMatchResponse {
+    repeated Contact contacts = 2;
+}
